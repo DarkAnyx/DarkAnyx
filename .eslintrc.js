@@ -1,39 +1,6 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es2020': true,
-    'node': true
+  extends: 'airbnb',
+  rules: {
+    'import/no-extraneous-dependencies': ['error', { devDependencies: ['./server/index.js'] }],
   },
-  'extends': [
-    'eslint:recommended',
-    'plugin:react/recommended'
-  ],
-  'parserOptions': {
-    'ecmaFeatures': {
-      'jsx': true
-    },
-    'ecmaVersion': 12,
-    'sourceType': 'module'
-  },
-  'plugins': [
-    'react'
-  ],
-  'rules': {
-    'indent': [
-      'error',
-      2
-    ],
-    'linebreak-style': [
-      'error',
-      'unix'
-    ],
-    'quotes': [
-      'error',
-      'single'
-    ],
-    'semi': [
-      'error',
-      'always'
-    ]
-  }
 };
