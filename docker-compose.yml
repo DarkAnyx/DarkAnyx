@@ -1,4 +1,5 @@
 version: '3.7'
+
 services:
   # Create frontend container
   frontend: # Name of our service
@@ -6,29 +7,39 @@ services:
     tty: true
     build:
       context: ./client
-      dockerfile: Dockerfile
     volumes:
       - './client:/app'
       - '/app/node_modules'
     ports: # Port binding to host from docker container
       - "3000:3000" # Bind port 3000 of host to 3000 of container
-  #   links:
-  #     - backend
+    links:
+      - backend
     command: npm start
-  # # Create backend container
-  # backend:
-  #   # Create backend container  
-  #   build: ./server
-  #   ports:
-  #     - "8080:8080"
-  #   container_name: backend-docker
-  #   restart: always
-  #   links:
-  #     - db
-  # # Create database container
-  # db:
-  #   image: postgres:11.6-alpine
-  #   ports:
-  #   - "5432:5432"
-  #   container_name: database-docker
-  #   restart: always
+    expose:
+      - "3000"
+    restart: always
+  # Create backend container
+  backend:    
+    container_name: backend
+    build: 
+      context: ./server
+    ports:
+      - "8080:8080"
+    volumes:
+      - './server:/app'
+      - '/app/node_modules'
+    environment:
+      PORT: 8080
+    command: npm run dev
+    expose:
+      - "8080"
+    restart: always
+    links:
+      - db
+  # Create database container
+  db:
+    image: postgres:11.6-alpine
+    ports:
+    - "5432:5432"
+    container_name: database
+    restart: always

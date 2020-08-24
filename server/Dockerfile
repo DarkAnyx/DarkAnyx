@@ -14,6 +14,3 @@ RUN npm install
 
 # Copies everything over to Docker environment
 COPY . .
-
-# # Uses port which is used by the actual application
-# EXPOSE 3000
