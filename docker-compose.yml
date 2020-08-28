@@ -8,8 +8,8 @@ services:
     build:
       context: ./client
     volumes:
-      - './client:/app'
-      - '/app/node_modules'
+      - './client:/usr/src/app'
+      - '/usr/src/app/node_modules'
     ports: # Port binding to host from docker container
       - "3000:3000" # Bind port 3000 of host to 3000 of container
     links:
@@ -26,8 +26,8 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - './server:/app'
-      - '/app/node_modules'
+      - './server:/usr/src/app'
+      - '/usr/src/app/node_modules'
     environment:
       PORT: 8080
     command: npm run dev
@@ -42,4 +42,8 @@ services:
     ports:
     - "5432:5432"
     container_name: database
+    environment: 
+      POSTGRES_DB: database
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123456
     restart: always
