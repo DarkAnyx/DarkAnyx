@@ -1,0 +1,48 @@
+{
+  "name": "darkanyx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .js --ext .jsx",
+    "fix": "npm run lint -- --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarkAnyx/DarkAnyx.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarkAnyx/DarkAnyx/issues"
+  },
+  "homepage": "https://github.com/DarkAnyx/DarkAnyx#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.2",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && ./scripts/branch-check.sh",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "./commitlint.config.js"
+    ]
+  },
+  "lint-staged": {
+    "*.(js|jsx)": [
+      "npm run lint"
+    ]
+  }
+}
